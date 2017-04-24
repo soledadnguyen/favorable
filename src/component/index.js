@@ -1,4 +1,7 @@
 import HeaderSection from './header-section';
-export  {
-    HeaderSection
-}
+import TimeRemaining from './time-remaining';
+
+export   {
+    HeaderSection,
+    TimeRemaining
+};

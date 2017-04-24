@@ -4,12 +4,13 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import {
   AppRegistry,
   
 } from 'react-native';
-import MainApp from './src/main';
+import MainApp from './main';
 
 
-AppRegistry.registerComponent('Favorable', () => Favorable);
+
+AppRegistry.registerComponent('Favorable', () => MainApp);
