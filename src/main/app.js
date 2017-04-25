@@ -7,7 +7,8 @@ import {
     StyleSheet
 } from 'react-native';
 import {
-    FListView
+    FListView,
+    ItemView
 } from '../component';
 
 const styles = StyleSheet.create({
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
 
 const MainView = () => (
   <View style={styles.container}>
-    <FListView />
+    <ItemView />
   </View>
 );
 
