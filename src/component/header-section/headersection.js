@@ -5,26 +5,23 @@ import {
     StyleSheet
 } from 'react-native';
 
+import Colors from '../../const';
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection:'row',
-        justifyContent:'space-between'
+        margin:15,
+        alignItems:'flex-start'
     },
-    sub:{
-        flexDirection:'row'
+    text: {
+        color:Colors.Colors.Gray
     }
-    
 });
 
 const HeaderSection = (props) => (
- 
+
   <View style={styles.container}>
-      <View style={styles.sub}>
-          <Text>{props.headerText}</Text>
-          <Text>dfasd</Text>
-      </View>
-      <View><Text>{props.headerEnd}</Text></View>
+    <Text style={styles.text}>{props.headerText}</Text>
   </View>
 );
 

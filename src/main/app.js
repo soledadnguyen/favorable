@@ -1,15 +1,14 @@
-import React ,{Component} from 'react';
+import React from 'react';
 
-import { bindActionCreators} from 'redux';
-import { connect } from 'react-redux';
+// import { bindActionCreators } from 'redux';
+// import { connect } from 'react-redux';
 import {
     View,
     StyleSheet
 } from 'react-native';
 import {
-        HeaderSection,
-        TimeRemaining 
-}  from '../component';
+    FListView
+} from '../component';
 
 const styles = StyleSheet.create({
     container: {
@@ -17,24 +16,13 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class MainView extends Component {
-    constructor(props) {
-        super(props);
-    } 
-    render() {
-        return (
-          <View style={styles.container}>
-              
-            <HeaderSection 
-              headerText='Ưu đãi đặc biệt' 
-              headerEnd='adb'
-            />
-           
+const MainView = () => (
+  <View style={styles.container}>
+    <FListView />
+  </View>
+);
 
-          </View>
-        );
-    }
-}
+export default MainView;
 
 
 

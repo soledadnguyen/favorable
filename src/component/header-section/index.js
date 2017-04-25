@@ -1,2 +1,3 @@
 import HeaderSection from './headersection';
-export default HeaderSection
+
+export default HeaderSection;
