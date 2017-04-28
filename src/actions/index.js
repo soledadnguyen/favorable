@@ -1,7 +1,11 @@
 import ActionTypes from './actiontypes';
 
-function fetchFavorableLists () {
+import API from '../api';
 
+function fetchFavorableLists () {
+    return (dispatch) => {
+        
+    }
 }
 const MainActions = {
     fetchFavorableLists

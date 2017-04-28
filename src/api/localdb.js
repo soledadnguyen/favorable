@@ -6,13 +6,14 @@ SQLite.enablePromise(true);
 let db = null;
 
 function initDatabase(dbInstance) {
-    return dbInstance.favorable(tx => {
-        tx.excuteSql('DROP TABLE IF EXIST FavoList;');
+    return dbInstance.transaction(tx => {
+        tx.executeSql('DROP TABLE IF EXIST FavoList;');
 
-        tx.excuteSql('CREATE TABLE IF NOT EXISTS FavoList( ' 
+        tx.executeSql('CREATE TABLE IF NOT EXISTS FavoList( ' 
         + 'item_id  INTEGER PRIMARY KEY NOT NULL,'
-        + 'item_time VARCHAR(10)'
-        + 'item_type INTEGER'
+        + 'item_name VARCHAR(200),'
+        + 'item_time VARCHAR(10),'
+        + 'item_type INTEGER,'
         + 'item_photo VARCHAR(1024)');
     });
 }
@@ -22,12 +23,59 @@ function openDatabase() {
     }
     return SQLite.openDatabase({name : "favorabledb.db"}).then((dbInstance) =>{
         db = dbInstance;
-        db.excuteSql('SELECT * FROM FavoList').then(([result]) => {
-            if(result.rows.length > 0) {
-                lw
-            }
-        }).catch(error => {
-
-        });
+        return initDatabase(db);
     });
 }
+
+function closeDatabase() {
+    return SQLite.close();
+}
+ 
+ const itemColumns = [
+    'item_id',
+    'item_name',
+    'item_time',
+    'item_type',
+    'item_photo',
+].join();
+const itemValues = [
+    '?',
+    '?',
+    '?',
+    '?',
+    '?'
+].join();
+
+function insertItems(itemList) {
+    db.transaction((tx) => {
+        tx.executeSql('INSERT OR REPLACE INTO FavoList (${itemColumns}) VALUES (${itemValues})',
+         [
+            itemList.item_id,
+            itemList.item_name,
+            itemList.item_time,
+            itemList.item_type,
+            itemList.item_photo,
+         ]
+        );
+    });
+}
+
+function getItems() {
+    return db.executeSql('SELECT * FROM FavoList').then(([result]) => {
+        const resultList = [];
+        const len = result.rows.length;
+        for (let i = 0; i < len ; i++) {
+            const row = result.rows.item(i);
+            resultList.push(row);
+        }
+        return resultList;
+    }).catch((error)=>{
+        console.log("ERROR ", error);
+    });
+}
+export default {
+    insertItems,
+    openDatabase,
+    getItems
+
+};
